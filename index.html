@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fluxos de Validação de Dados Cadastrais</title>
+<title>Fluxograma SalesForce</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -56,20 +56,20 @@ header p  { font-size: .7rem; color: var(--text-dim); margin-top: 2px; font-fami
 .leg { display: flex; align-items: center; gap: 6px; font-size: .7rem; color: var(--text-dim); }
 .ld  { width: 11px; height: 11px; border-radius: 2px; flex-shrink: 0; }
 
-/* ── COLUMNS WRAPPER ── */
+/* ── COLUMNS WRAPPER — centralizado ── */
 .cols-wrap {
-  display: grid;
-  grid-template-columns: 1fr 1px 1fr;
-  gap: 0;
-  align-items: start;
-  min-width: 900px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 20px;
 }
-.divider { background: var(--border); margin: 32px 0; }
 
 /* ── FLOW COLUMN ── */
 .col {
   padding: 28px 24px 60px;
   display: flex; flex-direction: column; align-items: center;
+  width: 100%;
+  max-width: 500px;
 }
 .col-title {
   font-size: .78rem; font-weight: 700; letter-spacing: .06em;
@@ -309,10 +309,7 @@ header p  { font-size: .7rem; color: var(--text-dim); margin-top: 2px; font-fami
 <header>
   <div class="h-icon">🔄</div>
   <div>
-    <h1>Fluxogramas de Validação Cadastros</h1>
-    <p>Segue abaixo dois fluxogramas:
-O primeiro refere-se à validação no momento da criação de cadastros no Salesforce.
-O segundo aborda a validação e os ajustes dos cadastros já existentes.</p>
+    <h1>Fluxograma: Validação de Dados Cadastrais na Criação de Lead</h1>
   </div>
 </header>
 
@@ -321,18 +318,14 @@ O segundo aborda a validação e os ajustes dos cadastros já existentes.</p>
   <div class="leg"><div class="ld" style="background:#160f00;border:1px solid #92400e"></div> Decisão</div>
   <div class="leg"><div class="ld" style="background:#200808;border:1px solid #991b1b"></div> 🚫 Bloqueio</div>
   <div class="leg"><div class="ld" style="background:#041f0e;border:1px solid #15803d"></div> ✅ Sucesso / OK</div>
-  <div class="leg"><div class="ld" style="background:#130820;border:1px solid #7e22ce"></div> ⚡ Automação</div>
 </div>
 
-<div style="overflow-x:auto">
 <div class="cols-wrap">
 
 <!-- ══════════════════════════════════════════════
      COLUNA 1 — CRIAÇÃO DE LEADS
 ══════════════════════════════════════════════ -->
 <div class="col">
-  <div class="col-title t1">🆕 Fluxo 1</div>
-  <div class="col-sub">Validação de Dados Cadastrais na Criação de Lead</div>
 
   <div class="nd terminal t-start" data-k="1_start" onclick="S('1_start')"><span>🟦</span><span>Início</span></div>
   <div class="vline"></div><div class="vtip"></div>
@@ -457,144 +450,9 @@ O segundo aborda a validação e os ajustes dos cadastros já existentes.</p>
   <div class="nd terminal t-end" data-k="1_end" onclick="S('1_end')"><span>🏁</span><span>Fim</span></div>
 </div>
 
-<!-- DIVIDER -->
-<div class="divider"></div>
-
-<!-- ══════════════════════════════════════════════
-     COLUNA 2 — DADOS EXISTENTES
-══════════════════════════════════════════════ -->
-<div class="col">
-  <div class="col-title t2">🔍 Fluxo 2</div>
-  <div class="col-sub">Validação e Correção de Dados Cadastrais Já Existentes</div>
-
-  <div class="nd terminal t-start" data-k="2_start" onclick="S('2_start')"><span>🟣</span><span>Início</span></div>
-  <div class="vline"></div><div class="vtip"></div>
-
- <div class="stag">⚙️ CONFIGURAÇÃO INICIAL (executado uma única vez)</div>
-<div class="vline s"></div>
-
-<div class="trigger nd" data-k="2_setup" onclick="S('2_setup')" style="width:300px; opacity:0.85">
-  <span class="ico">⚙️</span>
-  <div>AUTOMAÇÃO DE VALIDAÇÃO (ROBÔ)
-    <div class="flist" style="margin-top:6px">
-      <div class="fi">Definir regras (e-mail, telefone, etc.)</div>
-      <div class="fi">Integração base SAP e base de e-mail</div>
-      <div class="fi">Criar lógica de validação </div>
-      <div class="fi">Definir saídas (lista, status, alertas)</div>
-    </div>
-  </div>
-</div>
-
-<div class="vline"></div><div class="vtip"></div>
-
-
-  <!-- GATILHOS -->
-  <div class="stag">── Gatilhos de Identificação ──</div>
-  <div class="vline s"></div>
-  <div class="trigger nd" data-k="2_trig" onclick="S('2_trig')" style="width:300px">
-    <span class="ico">⚡</span>
-    <div>Dado inconsistente identificado via:
-      <div class="flist" style="margin-top:6px">
-        <div class="fi">📧 E-mail devolvido / Acompanhamento Status de Envio de Comunicados aos Clientes</div>
-        <div class="fi">📋 Base consolidada de clientes no SAP</div>
-        
-      </div>
-    </div>
-  </div>
-  <div class="vline"></div><div class="vtip"></div>
-
-  <!-- DECISÃO: QUAL DADO? -->
-  <div class="stag">── PROCESSAMENTO DO ROBÔ: Identifica inconsistências ──</div>
-  <div class="vline s"></div>
-  <div class="decision nd" data-k="2_dtriage" onclick="S('2_dtriage')">
-    <div class="dec-title">Qual dado está incorreto?</div>
-    <div class="dec-desc">O robô irá identificar com base nos dados informados</div>
-  </div>
-
-  <!-- 3 campos — mesmo formato do bloco de campos obrigatórios -->
-  <div class="vline"></div><div class="vtip"></div>
-  <div class="nd action co" data-k="2_dtriage_fields" onclick="S('2_dtriage_fields')" style="width:300px">
-    <span class="ico">⚠️</span>
-    <div>Dado incorreto identificado
-      <div class="flist">
-        <div class="fi">✉️ E-mail — sem @ / sem domínio / vazio</div>
-        <div class="fi">📞 Telefone — &lt;10 ou &gt;11 dígitos / vazio / sem DDD</div>
-        <div class="fi">💬 WhatsApp — &lt;10 ou &gt;11 dígitos / vazio</div>
-      </div>
-    </div>
-  </div>
-  <div class="vline"></div><div class="vtip"></div>
-
-  <div class="nd action co" data-k="2_dtriage_fields" onclick="S('2_dtriage_fields')" style="width:300px">
-    <span class="ico"> 📤 </span>
-    <div>SAÍDA DO ROBÔ
-      <div class="flist">
-        <div class="fi">📊Atualiza status na base</div>
-        <div class="fi">📋Gera lista para consultores</div>
-      </div>
-    </div>
-  </div>
-  <div class="vline"></div><div class="vtip"></div>
-
-  <!-- COBRANÇA AO TIME DE VENDAS -->
-  <div class="stag">── Acionamento do Time de Vendas ──</div>
-  <div class="vline s"></div>
-  <div class="nd action cc" data-k="2_notif" onclick="S('2_notif')" style="width:300px">
-    <span class="ico">📣</span>
-    <div>Aciona correção do Time de Vendas<div class="sub"> Realizar a cobrança com base consolidada de e-mails com falha, devolvidos e spam, junto à base de contatos do SAP, para que o consultor valide os dados de e-mail e telefone com o cliente</div></div>
-  </div>
-  <div class="vline"></div><div class="vtip"></div>
-
-  <!-- DECISÃO: CORRIGIU? -->
-  <div class="decision nd" data-k="2_dcorr" onclick="S('2_dcorr')">
-    <div class="dec-title">Consultor corrigiu o cadastro da base?</div>
-  <div class="dec-desc">Retorno do e-mail</div>
-  </div>
-  
-  <div class="branch">
-    <div class="bcol">
-      <div class="vline s"></div><div class="blabel y">NÃO ⏳</div><div class="vline s"></div>
-      <div class="block nd" data-k="2_escal" onclick="S('2_escal')">
-        <div class="bk-h">⏫ Recobrança para Correção</div>
-        <div class="bk-m">Recobrança para correção urgente</div>
-      </div>
-      <div class="vline s"></div>
-      <div class="retry nd" data-k="2_retry" onclick="S('2_retry')"><span>🔁</span><span>Nova cobrança ao consultor</span></div>
-    </div>
-    <div class="bcenter"><div class="bc-v"></div><div class="bc-h"></div></div>
-    <div class="bcol">
-      <div class="vline s"></div><div class="blabel n">SIM ✓</div><div class="vline s"></div>
-      <div class="nopass">Atualização Massiva de Dados no SAP ↓</div>
-    </div>
-  </div>
-
-  <div class="vline t"></div><div class="vtip"></div>
-
-  <div class="success nd" data-k="2_ok" onclick="S('2_ok')">
-    <span style="font-size:18px">✅</span>
-    <div><div style="font-weight:600">Cadastro regularizado</div><div style="font-size:.67rem;color:var(--text-dim);margin-top:2px">Dado válido · comunicação entregue</div></div>
-  </div>
-  <div class="vline"></div><div class="vtip"></div>
-
-  <div class="nd action cg" data-k="2_log" onclick="S('2_log')" style="width:300px">
-    <span class="ico">📊</span>
-    <div>Registra atualização na rede <div class="sub">Histórico de correção + data de regularização</div></div>
-  </div>
-  <div class="vline"></div><div class="vtip"></div>
-
-   <div class="success nd" data-k="2_mo" onclick="S('2_ok')">
-    <span style="font-size:18px">⚠️</span>
-    <div><div style="font-weight:600">Monitorar cadastro</div><div style="font-size:.67rem;color:var(--text-dim);margin-top:2px">Acompanhar e garantir a correção dos cadastros incorretos</div></div>
-  </div>
-  <div class="vline"></div><div class="vtip"></div>
-
-  <div class="nd terminal t-end2" data-k="2_end" onclick="S('2_end')"><span>🏁</span><span>Fim</span></div>
-</div>
-
 </div><!-- /cols-wrap -->
-</div><!-- /overflow -->
 
-<!-- PANEL -->
+<!-- ── DETAIL PANEL ── -->
 <div class="panel" id="panel">
   <button class="px" onclick="CP()">✕</button>
   <h3 id="pt"></h3>
@@ -603,7 +461,6 @@ O segundo aborda a validação e os ajustes dos cadastros já existentes.</p>
 
 <script>
 const D = {
-  // FLUXO 1
   "1_start":["🟦 Início – Criação de Lead","Ponto de entrada do fluxo de criação. O usuário acessa o Salesforce para cadastrar um novo Lead."],
   "1_s1":   ["👤 Inicia cadastro do Lead","O usuário acessa o módulo de Leads no Salesforce e clica em 'Novo' para iniciar o formulário."],
   "1_s2":   ["📝 Preenche dados gerais","Preenche campos de identificação: Razão Social, CNPJ, Inscrição Estadual e outros dados da empresa."],
@@ -620,15 +477,7 @@ const D = {
   "1_rw":   ["🔁 Correção e nova tentativa","O usuário corrige o WhatsApp e tenta salvar novamente. Todas as regras são revalidadas do início."],
   "1_ok":   ["✅ Todas as validações passaram","E-mail, Telefone e WhatsApp estão todos válidos. O Salesforce libera o salvamento do registro."],
   "1_saved":["🏆 Lead SALVO","O registro é gravado com sucesso no Salesforce."],
-  "1_end":  ["🏁 Fim do Fluxo 1","Lead cadastradoe e validado."],
-
-  // FLUXO 2
-  "2_start":  ["🟣 Início – Dados Já Existentes","Fluxo acionado quando um dado de contato de um Lead ou cliente já cadastrado é identificado como incorreto."],
-   "2_dtriage":["◆ Triagem do dado incorreto","Define qual campo precisa de correção: E-mail Principal (inválido), Telefone (sem DDD, fora do formato), ou WhatsApp (inválido/vazio)."],
-  "2_dtriage_fields":["⚠️ Tipos de dado incorreto","Detalhe dos critérios de invalidade por campo:\n• E-mail: sem @, sem domínio ou vazio\n• Telefone: menos de 10 ou mais de 11 dígitos, vazio ou sem DDD\n• WhatsApp: menos de 10 ou mais de 11 dígitos ou vazio"],
-  "2_ok":     ["✅ Cadastro regularizado","O dado está correto e em conformidade."],
-  "2_log":    ["📊 Registra atualização no SAP","Atualiza o histórico do registro com: data da correção, dado anterior, dado novo e responsável pela atualização. Garante rastreabilidade."],
-  "2_end":    ["🏁 Fim do Fluxo 2","Cadastro regularizado."]
+  "1_end":  ["🏁 Fim do Fluxo 1","Lead cadastrado e validado."],
 };
 
 function S(k) {
